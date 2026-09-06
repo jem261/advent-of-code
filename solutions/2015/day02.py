@@ -11,12 +11,20 @@ with open("inputs/2015/day02.txt") as f:
     s = f.read()
 
 def paper_calc(list):
-    total = 0
+    total_paper = 0
     for l, w, h in list:
         sides = [l*w, w*h, l*h]
-        total += (2 * sum(sides)) + min(sides)
-    return total
+        total_paper += (2 * sum(sides)) + min(sides)
+    return total_paper
 
-amount = paper_calc(parse(s))
+def ribbon_calc(list):
+    ribbon = 0
+    for l, w, h in list:
+        perimeter = [2*(l+w), 2*(l+h), 2*(w+h)]
+        ribbon += l*w*h + min(perimeter)
+    return ribbon
 
-print(f"The elves require {amount}m^2 of wrapping paper!")
+amount_paper = paper_calc(parse(s))
+amount_ribbon = ribbon_calc(parse(s))
+
+print(f"The elves require {amount_paper} square feet of wrapping paper and {amount_ribbon} !")
